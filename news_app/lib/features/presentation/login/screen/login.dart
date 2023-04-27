@@ -3,22 +3,31 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../state/login_notifier.dart';
 
-class LoginScreen extends ConsumerStatefulWidget {
-  const LoginScreen({super.key});
+class LoginScreen extends ConsumerWidget {
+  LoginScreen({super.key});
+
+  final _notifier = StateNotifierProvider<LoginNotifier, int>((ref) => LoginNotifier());
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends ConsumerState<LoginScreen> {
-  final _notifier = StateNotifierProvider<LoginNotifier, int>((ref) {
-    return LoginNotifier();
-  });
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: () {}),
+      floatingActionButton: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              ref.read(_notifier.notifier).increament();
+            },
+            child: const Icon(Icons.add),
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              ref.read(_notifier.notifier).decreament();
+            },
+            child: const Icon(Icons.remove),
+          ),
+        ],
+      ),
       body: Center(
         child: Text(ref.watch(_notifier).toString()),
       ),
