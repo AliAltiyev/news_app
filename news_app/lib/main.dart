@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'features/presentation/login/screen/login.dart';
+import 'core/application_initilize.dart';
+import 'features/presentation/splash/splash_view.dart';
 
-void main() => runApp(
-      const ProviderScope(child: MyApp()), // Wrap your app
-    );
+Future<void> main() async {
+  await ApplicationInitilize.init();
+  runApp(
+    const ProviderScope(child: MyApp()), // Wrap your app
+  );
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -19,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      home: SplashView(),
     );
   }
 }

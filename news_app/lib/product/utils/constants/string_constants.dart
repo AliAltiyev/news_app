@@ -4,5 +4,5 @@ import 'package:flutter/foundation.dart';
 abstract class StringConstants {
   StringConstants_();
 
-  final String appName = 'News app';
+  static const appName = "Belarus News";
 }
